@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Apt指令学习 | 泠雨尘梦のBlog</title><meta name="author" content="泠雨尘梦"><meta name="copyright" content="泠雨尘梦"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介​	apt 是用于处理 Debian 及其衍生版（如 Ubuntu）上的软件包的命令行工具。我们可以在多个资源中找到有关 apt 的官方文档和信息。 ​	常见官方文档如下：  Debian Wiki APT Ubuntu AptGet Howto(https:&#x2F;&#x2F;help.ubuntu.com&#x2F;community&#x2F;AptGet&#x2F;Howto   Debian Wiki - Debian 官方 W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apt指令学习">
+<meta property="og:url" content="https://wendrive.github.io/2024/03/01/Apt_Instruction_Learning/index.html">
+<meta property="og:site_name" content="泠雨尘梦のBlog">
+<meta property="og:description" content="简介​	apt 是用于处理 Debian 及其衍生版（如 Ubuntu）上的软件包的命令行工具。我们可以在多个资源中找到有关 apt 的官方文档和信息。 ​	常见官方文档如下：  Debian Wiki APT Ubuntu AptGet Howto(https:&#x2F;&#x2F;help.ubuntu.com&#x2F;community&#x2F;AptGet&#x2F;Howto   Debian Wiki - Debian 官方 W">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg">
+<meta property="article:published_time" content="2024-02-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-28T02:02:42.761Z">
+<meta property="article:author" content="泠雨尘梦">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://wendrive.github.io/2024/03/01/Apt_Instruction_Learning/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Apt指令学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-28 10:02:42'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script type="text/javascript" src="https://myhkw.cn/player/js/jquery.min.js"></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="泠雨尘梦のBlog"><span class="site-name">泠雨尘梦のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Apt指令学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-29T16:00:00.000Z" title="发表于 2024-03-01 00:00:00">2024-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-28T02:02:42.761Z" title="更新于 2024-04-28 10:02:42">2024-04-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Apt指令学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>​	<code>apt</code> 是用于处理 Debian 及其衍生版（如 Ubuntu）上的软件包的命令行工具。我们可以在多个资源中找到有关 <code>apt</code> 的官方文档和信息。</p>
+<p>​	常见官方文档如下：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.debian.org/zh_CN/Apt">Debian Wiki APT</a></li>
+<li><a href="">Ubuntu AptGet Howto</a>(<a target="_blank" rel="noopener" href="https://help.ubuntu.com/community/AptGet/Howto">https://help.ubuntu.com/community/AptGet/Howto</a></li>
+</ul>
+<blockquote>
+<p><strong>Debian Wiki</strong> - Debian 官方 Wiki 提供了关于 <code>apt</code> 工具的使用和特性的详尽信息。可以访问 Debian Wiki 来获取有关 <code>apt</code> 的详细说明和教程。</p>
+<p><strong>Ubuntu Documentation</strong> - Ubuntu 也提供了它的软件包管理工具的详细文档，其中包括 <code>apt</code> 的使用指南。Ubuntu 的文档通常是针对新用户更友好的，包含实际的命令示例</p>
+</blockquote>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>​	这里简单介绍<code>apt</code>，<code>apt-get</code>以及<code>dpkg</code></p>
+<p>​	<code>dpkg</code>、<code>apt</code> 和 <code>apt-get</code> 是 Linux 系统（尤其是基于 Debian 的系统，如 Ubuntu）中的包管理工具，每个工具都有其特定的用途和功能。下面是它们之间的主要区别：</p>
+<ol>
+<li><strong>dpkg</strong>：<ul>
+<li><code>dpkg</code>（Debian package）是一个底层的包管理工具，用于安装、删除和管理 Debian 格式的软件包（<code>.deb</code> 文件）。</li>
+<li>它不处理依赖关系，意味着如果一个包依赖于其他包，<code>dpkg</code> 不会自动安装或更新依赖的包，用户需要手动管理这些依赖。</li>
+<li>常用命令包括安装 (<code>dpkg -i</code>) 或删除 (<code>dpkg -r</code>) 软件包。</li>
+</ul>
+</li>
+<li><strong>apt-get</strong>：<ul>
+<li><code>apt-get</code> 是一个更高级的包管理工具，可以自动处理包的依赖关系。</li>
+<li>它使用 APT（Advanced Packaging Tool）系统的功能，从定义好的软件仓库（repository）下载和安装包，同时解决所有依赖关系。</li>
+<li><code>apt-get</code> 提供了包括安装 (<code>apt-get install</code>)、更新 (<code>apt-get update</code>)、升级 (<code>apt-get upgrade</code>) 和清理 (<code>apt-get autoremove</code>) 等功能。</li>
+</ul>
+</li>
+<li><strong>apt</strong>：<ul>
+<li><code>apt</code> 是一个较新的命令行工具，旨在简化 <code>apt-get</code> 和 <code>apt-cache</code> 等工具的使用，提供更友好的界面。</li>
+<li><code>apt</code> 提供了大多数日常包管理任务所需的命令，例如安装 (<code>apt install</code>)、删除 (<code>apt remove</code>)、更新软件包列表 (<code>apt update</code>) 和升级软件包 (<code>apt upgrade</code>)。</li>
+<li><code>apt</code> 通常更适合终端用户，因为它的输出更易于阅读，命令也更为直观。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>总结来说，<code>dpkg</code> 是一个基本的包工具，主要用于<code>.deb</code>文件的管理，而不自动处理依赖。<code>apt-get</code> 和 <code>apt</code> 都能处理依赖关系，并从软件仓库中管理包，但 <code>apt</code> 提供了更现代化的用户体验。对于大多数用户来说，<code>apt</code> 通常是更好的选择，因为它简化了包管理操作。</p>
+</blockquote>
+<h1 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h1><h2 id="维护命令"><a href="#维护命令" class="headerlink" title="维护命令"></a>维护命令</h2><h3 id="apt-get-update"><a href="#apt-get-update" class="headerlink" title="apt-get update"></a>apt-get update</h3><p>​	在更改<code>/etc/apt/source.list</code> 文件之后, 需要运行此命令更新源列表信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<h3 id="apt-get-upgrade"><a href="#apt-get-upgrade" class="headerlink" title="apt-get upgrade"></a>apt-get upgrade</h3><p>​	用于升级所有已经安装的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="apt-get-dist-upgrade"><a href="#apt-get-dist-upgrade" class="headerlink" title="apt-get dist-upgrade"></a>apt-get dist-upgrade</h3><p>​	和<code>apt-get upgrade</code>功能相同, 但是</p>
+<h2 id="搜索包"><a href="#搜索包" class="headerlink" title="搜索包"></a>搜索包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>搜索所有与 <code>package_name</code>相关的软件包，还会显示所有与<code>package_name</code>相关的软件包，便于了解版本与组件的关系</p>
+</blockquote>
+<h2 id="检测安装"><a href="#检测安装" class="headerlink" title="检测安装"></a>检测安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">dpkg检测</span></span><br><span class="line">dpkg -l | grep &lt;package_name&gt;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">apt 命令查看</span></span><br><span class="line">apt list --installed | grep &lt;package_name&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://wendrive.github.io">泠雨尘梦</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://wendrive.github.io/2024/03/01/Apt_Instruction_Learning/">https://wendrive.github.io/2024/03/01/Apt_Instruction_Learning/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://wendrive.github.io" target="_blank">泠雨尘梦のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a><a class="post-meta__tags" href="/tags/ubuntu/">ubuntu</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/01/Anaconda_JupyterNotebook_Setup/" title="windows环境下Anaconda安装JupyterNotebook以及配置"><img class="cover" src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">windows环境下Anaconda安装JupyterNotebook以及配置</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/01/Ali_Cloud_Computing_Part01/" title="阿里云计算通识学习"><img class="cover" src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">阿里云计算通识学习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/01/Commonly%20Used%20Scripts/" title="常用脚本梳理"><img class="cover" src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-01</div><div class="title">常用脚本梳理</div></div></a></div><div><a href="/2024/03/01/Apache_Seatunnel_Learning/" title="Apache Seatunnel 学习"><img class="cover" src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-01</div><div class="title">Apache Seatunnel 学习</div></div></a></div><div><a href="/2024/03/22/Ubuntu_Server_Environment_Configuration/" title="ubuntu-server 环境搭建"><img class="cover" src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-22</div><div class="title">ubuntu-server 环境搭建</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">泠雨尘梦</div><div class="author-info__description">人面不知何处去，桃花依旧笑春风。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">吾日三省吾身</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B4%E6%8A%A4%E5%91%BD%E4%BB%A4"><span class="toc-number">3.1.</span> <span class="toc-text">维护命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-get-update"><span class="toc-number">3.1.1.</span> <span class="toc-text">apt-get update</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-get-upgrade"><span class="toc-number">3.1.2.</span> <span class="toc-text">apt-get upgrade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-get-dist-upgrade"><span class="toc-number">3.1.3.</span> <span class="toc-text">apt-get dist-upgrade</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%8C%85"><span class="toc-number">3.2.</span> <span class="toc-text">搜索包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E5%AE%89%E8%A3%85"><span class="toc-number">3.3.</span> <span class="toc-text">检测安装</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/17/Python_Study/" title="无题">无题</a><time datetime="2024-04-17T02:20:38.970Z" title="发表于 2024-04-17 10:20:38">2024-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/22/Ubuntu_Server_Environment_Configuration/" title="ubuntu-server 环境搭建"><img src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ubuntu-server 环境搭建"/></a><div class="content"><a class="title" href="/2024/03/22/Ubuntu_Server_Environment_Configuration/" title="ubuntu-server 环境搭建">ubuntu-server 环境搭建</a><time datetime="2024-03-21T16:00:00.000Z" title="发表于 2024-03-22 00:00:00">2024-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/01/Apache_Seatunnel_Learning/" title="Apache Seatunnel 学习"><img src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Apache Seatunnel 学习"/></a><div class="content"><a class="title" href="/2024/03/01/Apache_Seatunnel_Learning/" title="Apache Seatunnel 学习">Apache Seatunnel 学习</a><time datetime="2024-02-29T16:00:00.000Z" title="发表于 2024-03-01 00:00:00">2024-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/01/Anaconda_JupyterNotebook_Setup/" title="windows环境下Anaconda安装JupyterNotebook以及配置"><img src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="windows环境下Anaconda安装JupyterNotebook以及配置"/></a><div class="content"><a class="title" href="/2024/03/01/Anaconda_JupyterNotebook_Setup/" title="windows环境下Anaconda安装JupyterNotebook以及配置">windows环境下Anaconda安装JupyterNotebook以及配置</a><time datetime="2024-02-29T16:00:00.000Z" title="发表于 2024-03-01 00:00:00">2024-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/01/Apt_Instruction_Learning/" title="Apt指令学习"><img src="https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Apt指令学习"/></a><div class="content"><a class="title" href="/2024/03/01/Apt_Instruction_Learning/" title="Apt指令学习">Apt指令学习</a><time datetime="2024-02-29T16:00:00.000Z" title="发表于 2024-03-01 00:00:00">2024-03-01</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2021/08/21/58iWQGgOYqNch4X.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 泠雨尘梦</div><div class="footer_custom_text">学习不是知识的填鸭式灌输，而是一种思维的训练。</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script type="text/javascript" id="myhk" src="https://myhkw.cn/api/player/157888126354" key="157888126354" m="1"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
